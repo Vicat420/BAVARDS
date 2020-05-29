@@ -1,0 +1,15 @@
+package Bavards;
+
+import javax.swing.JFrame;
+
+public class Main {
+
+
+	public static void main(String[] args) {
+		Concierge c= new Concierge();    
+		FenConnexion co = new FenConnexion(c);
+		co.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+	}
+}
+
+
