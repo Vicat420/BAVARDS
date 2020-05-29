@@ -20,7 +20,7 @@ public class FenMessage extends JFrame implements ActionListener{
 	private JPanel panel = new JPanel();
 	private JPanel panel2 = new JPanel();
 	public JTextField message = new JTextField(23);
-	private JList<String> utilisateurs = new JList<String>();
+	private JList<String> bavards = new JList<String>();
 	public JTextArea chat = new JTextArea(16,20);
 	private JScrollPane sp2 = new JScrollPane(chat, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	private JButton envoyer = new JButton("Envoyer");
@@ -35,8 +35,8 @@ public class FenMessage extends JFrame implements ActionListener{
 		for(Bavard e:concierge.bavards) {
 			    model.addElement(e.identifiant);
 			}
-		utilisateurs.setModel(model);
-		System.out.println(utilisateurs);
+		bavards.setModel(model);
+		System.out.println(bavards);
 		this.setTitle("chat");
 	    this.setSize(500, 400);
 	    this.setResizable(false);
@@ -83,7 +83,7 @@ public class FenMessage extends JFrame implements ActionListener{
 			for(Bavard e:concierge.bavards) {
 				    model.addElement(e.identifiant);
 				}
-			utilisateurs.setModel(model);
+			bavards.setModel(model);
 			panel2.updateUI();
 		}
 		
