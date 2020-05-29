@@ -1,0 +1,52 @@
+package Bavards;
+
+import java.util.ArrayList;
+
+public class Bavard implements PapotageListener{
+	private Concierge c;
+	public message fenMessage;
+	private boolean isConnected = true;
+	ArrayList <PapotageListener> listeners= new ArrayList <PapotageListener>();
+	public String identifiant;
+
+	public Bavard(String identifiant,Concierge c){
+		this.c = c;
+		this.identifiant = identifiant;
+		fenMessage = new message(this,c);
+		System.out.println(this.identifiant+" créé(e)");
+	}	
+	
+	public void afficherMessage(PapotageEvent pe) {
+		System.out.println("Sujet : "+pe.getSujet()+".\n Corps : "+pe.getCorps()+".");
+	}
+	
+	public void genererPapotageEvent(String message, String id){
+		PapotageEvent pe = new PapotageEvent(this, "message", message);
+		c.actionPerformed(pe);
+		}	
+	
+	public String actionPerformed(PapotageEvent pe) {
+		String a = fenMessage.chat.getText();
+		fenMessage.chat.setText(a +"\n"+pe.getAuteur().identifiant+" : "+pe.getCorps());
+		fenMessage.refresh();
+		return("");
+	}
+	
+	public void addPapotageListener(PapotageListener pl){
+		listeners.add(pl);
+	}
+	
+	public void removePapotageListener(PapotageListener pl){
+		listeners.remove(pl);
+	}
+	
+	public void setConnected() {
+		boolean bool = this.isConnected();
+		this.isConnected = !bool;
+	}
+	
+	public boolean isConnected() {
+		fenMessage.chat.setText(this.identifiant + "vient de se connecter.");
+		return this.isConnected;
+	}
+}
