@@ -1,0 +1,54 @@
+package Bavards;
+
+import java.util.ArrayList;
+
+public class Concierge implements PapotageListener{
+	public ArrayList<Bavard> bavards = new ArrayList <Bavard>();
+
+	public Bavard getBavard(String identifiant) {
+		for(Bavard b:bavards) {
+			if(b.identifiant.equals(identifiant))
+				return b;
+		}
+		return getBavard("admin");
+	}
+	
+	public int verifBavard(String identifiant){		
+		int n = 0;								    
+		for (Bavard b:bavards) {
+			if(b.identifiant.equals(identifiant))
+				n = 1;
+				if(b.isConnected()==false) {
+					n = 2;
+					return n;
+				}
+				else {
+					return n;
+				}				
+		}
+		return n;
+	}
+	
+	public void addBavard(Bavard bavard){
+		boolean bool = true;
+		for (Bavard b:bavards) {
+			if(b.identifiant.equals(bavard.identifiant))
+				bool = false;
+		}
+		if(bool) {
+			this.bavards.add(bavard);
+			System.out.println(bavard.identifiant +"  connecté(e)");
+		}
+		else
+			System.out.println("Pseudo déjà pris.");
+	}
+
+	public String actionPerformed(PapotageEvent pe ) {
+		for(Bavard b:this.bavards) {
+			b.actionPerformed(pe);
+		}
+		return(pe.getCorps());
+	}
+
+
+}
